@@ -1,0 +1,75 @@
+[
+    {
+        "id": "bfded2a3941bf0b6",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c2e7a7e2029a9876",
+        "type": "inject",
+        "z": "bfded2a3941bf0b6",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 140,
+        "wires": [
+            [
+                "bd1bd8177ae1f8a2"
+            ]
+        ]
+    },
+    {
+        "id": "affa49042cd7a489",
+        "type": "debug",
+        "z": "bfded2a3941bf0b6",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "bd1bd8177ae1f8a2",
+        "type": "function",
+        "z": "bfded2a3941bf0b6",
+        "name": "function 1",
+        "func": "// Lo que está después de \"//\" son comentarios\n// Crea un objeto Date a partir del msg.payload enviado por timestamp\nvar date = new Date(msg.payload);\n// Cambia el payload para que sea una fecha con formato\nmsg.payload = {\n    \"date\": date.toLocaleDateString(\"es-MX\"),\n    \"time\": date.toLocaleTimeString(\"es-MX\"),\n    \"timestamp\": date.getTime()\n};\nmsg.payload = JSON.stringify(msg.payload);\n// Regresa el mensaje para que se envíe al siguiente nodo\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 140,
+        "wires": [
+            [
+                "affa49042cd7a489"
+            ]
+        ]
+    }
+]
